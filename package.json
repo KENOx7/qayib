@@ -1,0 +1,16 @@
+{
+  "name": "school-attendance",
+  "version": "1.0.0",
+  "description": "Simple attendance (qayıb) tracker for 26 students and 6 subjects",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "bcrypt": "^5.1.0",
+    "express-session": "^1.17.3",
+    "body-parser": "^1.20.2"
+  }
+}
