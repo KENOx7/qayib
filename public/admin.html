@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin Panel - Qayıb əlavə et</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Panel</h1>
+
+    <div id="login-wrap">
+      <h3>Login</h3>
+      <form id="login-form">
+        <input type="text" id="username" placeholder="username" required />
+        <input type="password" id="password" placeholder="password" required />
+        <button type="submit">Giriş</button>
+      </form>
+      <div id="login-msg"></div>
+    </div>
+
+    <div id="panel" class="hidden">
+      <button id="logout">Çıxış</button>
+      <h3>Şagirdi seç və bu günün dərsi üçün qayıb əlavə et</h3>
+
+      <label for="student-select">Şagird:</label>
+      <select id="student-select"></select>
+
+      <div id="subjects-list"></div>
+
+      <button id="save-absence">Save (Qayıb Yaz)</button>
+      <div id="save-msg"></div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
