@@ -1,41 +1,32 @@
--- tables
-CREATE TABLE IF NOT EXISTS users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
-  password_hash TEXT NOT NULL,
-  role TEXT NOT NULL -- e.g. 'admin'
+-- db_setup.sql  (for reference)
+CREATE TABLE IF NOT EXISTS admins (
+  id INTEGER PRIMARY KEY,
+  username TEXT UNIQUE,
+  password_hash TEXT
 );
 
 CREATE TABLE IF NOT EXISTS students (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  full_name TEXT NOT NULL
+  id INTEGER PRIMARY KEY,
+  name TEXT
 );
 
 CREATE TABLE IF NOT EXISTS subjects (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL
+  id INTEGER PRIMARY KEY,
+  name TEXT
 );
 
 CREATE TABLE IF NOT EXISTS absences (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  student_id INTEGER NOT NULL,
-  subject_id INTEGER NOT NULL,
-  date TEXT NOT NULL, -- YYYY-MM-DD
-  note TEXT,
-  created_by INTEGER,
-  created_at TEXT DEFAULT (datetime('now')),
-  FOREIGN KEY(student_id) REFERENCES students(id),
-  FOREIGN KEY(subject_id) REFERENCES subjects(id),
-  FOREIGN KEY(created_by) REFERENCES users(id)
+  id INTEGER PRIMARY KEY,
+  student_id INTEGER,
+  subject_id INTEGER,
+  date TEXT
 );
 
--- seed 6 subjects
-INSERT INTO subjects(name) VALUES ('Riyaziyyat'), ('Fizika'), ('Kimya'), ('Tarix'), ('Azərbaycan dili'), ('İngilis dili');
+-- Default admin (password: admin123) hashed with bcrypt
+INSERT OR IGNORE INTO admins (id, username, password_hash) VALUES (1, 'admin', '$2b$12$qyuskrx7G8CKx1kvH6mJuuEt0CbnjlrYzgydOzc2Q/nhC46y4vhUq');
 
--- seed 26 students (adları nümunə üçün)
-INSERT INTO students(full_name) VALUES
-('Əli Məmmədov'),('Nərmin Hüseynova'),('Tural Əliyev'),('Leyla Quliyeva'),('Zaur Rəhimov'),
-('Aynur Məmmədzadə'),('Orxan Məmmədli'),('Səbinə Əliyeva'),('Murad Həsənov'),('Rəvan Nəsirov'),
-('Günay İsmayılova'),('Muradə Quliyev'),('Sabir Məlikov'),('Aysel Sultanova'),('Fərhad Əsədov'),
-('Nijat Abbasov'),('Sənan Qurbanov'),('Aida Məmmədova'),('Kamran Yaqubov'),('Leyla Məmmədli'),
-('Səid Hüseynli'),('Fatimə Rəhimova'),('Rovshan Məmmədli'),('Zeynəb Əliyeva'),('Elvin Həsənzadə'),('Mehriban Quliyeva');
+-- Subjects (Azerbaijani)
+INSERT OR IGNORE INTO subjects (id, name) VALUES (1, 'Riyaziyyat'), (2, 'Fizika'), (3, 'Kimya'), (4, 'Biologiya'), (5, 'Tarix'), (6, 'İnformatika');
+
+-- Students Şagird 1 ... Şagird 26
+-- (server seeds them automatically)
